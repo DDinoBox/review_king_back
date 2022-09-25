@@ -9,4 +9,4 @@ class User(TimeStampModel):
     grade    = models.IntegerField(default=6)
 
     class Meta: 
-        db_table = "users"
+        db_table = 'users'

@@ -35,18 +35,17 @@ ALLOWED_HOSTS=env('ALLOWED_HOSTS')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': env("DB_NAME"),
-        'USER': env("DB_USER"),
-        'PASSWORD': env("DB_PASSWORD"),
-        'HOST': env("DB_HOST"),
-        'PORT': env.int("DB_PORT")
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST'),
+        'PORT': env.int('DB_PORT')
     }
 }
 
 AWS_ACCESS_KEY_ID=env('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY=env('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME=env('AWS_STORAGE_BUCKET_NAME')
-AWS_REGION=env('AWS_REGION')
 
 INSTALLED_APPS = [
     # 'django.contrib.admin',

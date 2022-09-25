@@ -47,7 +47,7 @@ class ReviewView(View):
                     s3resource.Bucket(AWS_STORAGE_BUCKET_NAME).put_object(Key='/%s'%(file), Body=file)
                     ReviewImage.objects.create(
                         review  = review,
-                        img_url = 'https://review-king-kurly.s3.ap-northeast-2.amazonaws.com/'+"/%s"%(file),
+                        img_url = 'https://review-king-kurly.s3.ap-northeast-2.amazonaws.com/'+'/%s'%(file),
                     )
                     
                 for product_id in product_id_purchased_with :
@@ -76,7 +76,7 @@ class ReviewView(View):
         
         except Product.DoesNotExist:
             return JsonResponse({'message': 'PRODUCT_DOES_NOT_EXIST'}, status=404)
-        
+
 class WriteReviewView(View):
     @login_decorator
     def get(self, request, ordered_item_id):
@@ -185,13 +185,13 @@ class BestReviewListView(View):
 
 class ReviewRankingCategoryView(View):
     def get(self, request):
-        sub_categories = SubCategory.objects.all()
+        sub_categories     = SubCategory.objects.all()
         sub_category_names = [sub_category.name for sub_category in sub_categories]
         
         category_list = []
         
         for sub_category_name in sub_category_names:
-            review = Review.objects.filter(product_id__sub_category__name=sub_category_name)
+            review       = Review.objects.filter(product_id__sub_category__name=sub_category_name)
             sub_category = sub_categories.get(name=sub_category_name)
             category_list.append({
                 'sub_category'      : sub_category.id,
@@ -216,13 +216,12 @@ class ReviewLikeView(View):
             data      = json.loads(request.body)
             review_id = data['review_id']
             
-            review = Review.objects.get(id=review_id)
+            review     = Review.objects.get(id=review_id)
             like, flag = Like.objects.get_or_create(review=review,user=request.user)
             
             if not flag:
                 like.delete()
                 message = 'NO_CONTENT'
-                
             else:
                 message = 'SUCCESS'
                 
